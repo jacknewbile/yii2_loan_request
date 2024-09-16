@@ -72,3 +72,7 @@ Parallel Processing and Transaction Isolation
 
 To implement parallel processing of request handling in the application, I have used transaction isolation to ensure that concurrent processes don't conflict with each other and Selective Query Processing. 
 I have implemented a query that only processes requests (pending status) from customers who do not already have an approved request. This was done using SQL query with subquery to exclude customers who already have an approved request.
+
+
+###
+Time Spent on the Project: 8h
