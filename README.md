@@ -38,7 +38,7 @@ docker-compose up -d
 ```
 This will start all the necessary containers: yii_php, yii_postgres, yii_nginx.
 
-### 3. Run Database Migrations
+### 3. Run Database Migrations and Composer Install
 After the containers are up and running, you need to run the database migrations to set up the database schema.
 
 Steps to run migrations:
@@ -47,13 +47,16 @@ Steps to run migrations:
     ```bash
     docker exec -it yii_php bash
     ``` 
-    This command opens a bash shell inside the container where the Yii2 application is running.
+  This command opens a bash shell inside the container where the Yii2 application is running.
 
 * Navigate to the project folder
     ```bash
     cd yii_project
     ```
-
+* Run the Composer Install:
+    ```bash
+    composer install
+  
 * Run the migrations:
     ```bash
     php yii migrate
