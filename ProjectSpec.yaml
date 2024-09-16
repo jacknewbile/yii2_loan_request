@@ -1,0 +1,93 @@
+openapi: 3.0.0
+info:
+  title: Yii2 Loan Request Project
+  version: 0.0.1
+  description: This API allows clients to submit loan requests and trigger request processing.
+
+servers:
+  - url: http://admin.localhost
+
+paths:
+  /requests:
+    post:
+      summary: Create a new loan request
+      description: Submits a new loan request for a customer.
+      requestBody:
+        description: Loan request data
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                customer_id:
+                  type: integer
+                  description: Unique ID of the customer
+                  example: 1243
+                amount:
+                  type: integer
+                  description: Loan amount
+                  example: 3423
+                term:
+                  type: integer
+                  description: Loan term in days
+                  example: 30
+      responses:
+        '200':
+          description: Request created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                    example: true
+                  id:
+                    type: integer
+                    description: ID of the newly created request
+                    example: 12345
+        '400':
+          description: Bad Request (e.g., customer already has an approved request)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                    example: false
+
+  /processor:
+    get:
+      summary: Process loan requests
+      description: Processes pending loan requests with a random approval or decline decision.
+      parameters:
+        - in: query
+          name: delay
+          required: true
+          schema:
+            type: integer
+            description: Time delay (in seconds) used to simulate processing time.
+            example: 5
+      responses:
+        '200':
+          description: Requests processed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                    example: true
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  result:
+                    type: boolean
+                    example: false
